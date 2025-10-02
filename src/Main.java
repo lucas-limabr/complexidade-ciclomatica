@@ -3,15 +3,12 @@
 public class Main {
     public static void main(String[] args) {
 
-        final Double PESO = 64.0;
-        final Double ALTURA = 1.74;
+        final double PESO = 64.0;
+        final double ALTURA = 1.74;
         final String SEXO = "masculino";
         String classificacaoIMC;
 
         Pessoa p1 = new Pessoa(PESO, ALTURA, SEXO);
-        IMC imc = new IMC();
-        classificacaoIMC = imc.calcularIMC(p1);
-
-        System.out.println(classificacaoIMC);
+        System.out.println(p1.calcularIMC());
     }
 }
