@@ -12,6 +12,9 @@ public class Pessoa {
         this.setPeso(peso);
     }
 
+    public Pessoa() {
+    }
+
     public String calcularIMC()
     {
         double imc;
@@ -38,7 +41,7 @@ public class Pessoa {
                 classificacaoImc = "Acima do peso ideal";
             }
             else {
-                classificacaoImc = "Obeso";
+                classificacaoImc = "Obesa";
             }
         }
         else
@@ -61,7 +64,7 @@ public class Pessoa {
             }
             else
             {
-                classificacaoImc = "Obesa";
+                classificacaoImc = "Obeso";
             }
         }
         return classificacaoImc;
