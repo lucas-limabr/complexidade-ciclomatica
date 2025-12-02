@@ -1,109 +1,213 @@
 package com.lucaslima.imc;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class PessoaTest {
 
-    Pessoa p1;
-    Pessoa p2;
+    Pessoa pessoa;
 
     @BeforeEach
     void setUp() {
-        p1 = new Pessoa();
-        p2 = new Pessoa();
+        pessoa = new Pessoa();
     }
 
     @Test
     void deveRetornarHomemAbaixodoPeso()
     {
-        p1.setPeso(20.6);
-        p1.setAltura(1);
-        p1.setSexo("masculino");
-        assertEquals("Abaixo do peso", p1.calcularIMC());
+        pessoa.setPeso(20.6);
+        pessoa.setAltura(1);
+        pessoa.setSexo("masculino");
+        assertEquals("Abaixo do peso", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarHomemPesoNormal()
     {
-        p1.setPeso(26.3);
-        p1.setAltura(1);
-        p1.setSexo("masculino");
-        assertEquals("No peso normal", p1.calcularIMC());
+        pessoa.setPeso(26.3);
+        pessoa.setAltura(1);
+        pessoa.setSexo("masculino");
+        assertEquals("No peso normal", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarHomemMarginalmenteAcimaPeso()
     {
-        p1.setPeso(27.7);
-        p1.setAltura(1);
-        p1.setSexo("masculino");
-        assertEquals("Marginalmente acima do peso", p1.calcularIMC());
+        pessoa.setPeso(27.7);
+        pessoa.setAltura(1);
+        pessoa.setSexo("masculino");
+        assertEquals("Marginalmente acima do peso", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarHomemMAcimaPesoIdeal()
     {
-        p1.setPeso(31.0);
-        p1.setAltura(1);
-        p1.setSexo("masculino");
-        assertEquals("Acima do peso ideal", p1.calcularIMC());
+        pessoa.setPeso(31.0);
+        pessoa.setAltura(1);
+        pessoa.setSexo("masculino");
+        assertEquals("Acima do peso ideal", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarHomemObeso()
     {
-        p1.setPeso(31.1);
-        p1.setAltura(1);
-        p1.setSexo("masculino");
-        assertEquals("Obeso", p1.calcularIMC());
+        pessoa.setPeso(31.1);
+        pessoa.setAltura(1);
+        pessoa.setSexo("masculino");
+        assertEquals("Obeso", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarMulherAbaixodoPeso()
     {
-        p2.setPeso(19.0);
-        p2.setAltura(1);
-        p2.setSexo("feminino");
-        assertEquals("Abaixo do peso", p2.calcularIMC());
+        pessoa.setPeso(19.0);
+        pessoa.setAltura(1);
+        pessoa.setSexo("feminino");
+        assertEquals("Abaixo do peso", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarMulherPesoNormal()
     {
-        p2.setPeso(25.7);
-        p2.setAltura(1);
-        p2.setSexo("feminino");
-        assertEquals("No peso normal", p2.calcularIMC());
+        pessoa.setPeso(25.7);
+        pessoa.setAltura(1);
+        pessoa.setSexo("feminino");
+        assertEquals("No peso normal", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarMulherMarginalmenteAcimaPeso()
     {
-        p2.setPeso(27.2);
-        p2.setAltura(1);
-        p2.setSexo("feminino");
-        assertEquals("Marginalmente acima do peso", p2.calcularIMC());
+        pessoa.setPeso(27.2);
+        pessoa.setAltura(1);
+        pessoa.setSexo("feminino");
+        assertEquals("Marginalmente acima do peso", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarMulherMAcimaPesoIdeal()
     {
-        p2.setPeso(32.2);
-        p2.setAltura(1);
-        p2.setSexo("feminino");
-        assertEquals("Acima do peso ideal", p2.calcularIMC());
+        pessoa.setPeso(32.2);
+        pessoa.setAltura(1);
+        pessoa.setSexo("feminino");
+        assertEquals("Acima do peso ideal", pessoa.calcularIMC(pessoa));
     }
 
     @Test
     void deveRetornarMulherObesa()
     {
-        p2.setPeso(32.3);
-        p2.setAltura(1);
-        p2.setSexo("feminino");
-        assertEquals("Obesa", p2.calcularIMC());
+        pessoa.setPeso(32.3);
+        pessoa.setAltura(1);
+        pessoa.setSexo("feminino");
+        assertEquals("Obesa", pessoa.calcularIMC(pessoa));
+    }
+
+    //Mocks
+    @Test
+    void deveRetornarHomemAbaixodoPesoMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(20.6);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("masculino");
+
+        String resultado = this.pessoa.calcularIMC(info);
+        assertEquals("Abaixo do peso", resultado);
+    }
+
+    @Test
+    void deveRetornarHomemPesoNormalMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(26.3);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("masculino");
+
+        String resultado = this.pessoa.calcularIMC(info);
+        assertEquals("No peso normal", resultado);
+    }
+
+    @Test
+    void deveRetornarHomemMarginalmenteAcimaPesoMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(27.7);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("masculino");
+        assertEquals("Marginalmente acima do peso", pessoa.calcularIMC(info));
+    }
+
+    @Test
+    void deveRetornarHomemMAcimaPesoIdealMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(31.0);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("masculino");
+        assertEquals("Acima do peso ideal", pessoa.calcularIMC(info));
+    }
+
+    @Test
+    void deveRetornarHomemObesoMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(31.1);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("masculino");
+        assertEquals("Obeso", pessoa.calcularIMC(info));
+    }
+
+    @Test
+    void deveRetornarMulherAbaixodoPesoMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(19.0);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("feminino");
+        assertEquals("Abaixo do peso", pessoa.calcularIMC(info));
+    }
+
+    @Test
+    void deveRetornarMulherPesoNormalMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(25.7);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("feminino");
+        assertEquals("No peso normal", pessoa.calcularIMC(info));
+    }
+
+    @Test
+    void deveRetornarMulherMarginalmenteAcimaPesoMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(27.2);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("feminino");
+        assertEquals("Marginalmente acima do peso", pessoa.calcularIMC(info));
+    }
+
+    @Test
+    void deveRetornarMulherMAcimaPesoIdealMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(32.2);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("feminino");
+        assertEquals("Acima do peso ideal", pessoa.calcularIMC(info));
+    }
+
+    @Test
+    void deveRetornarMulherObesaMock()
+    {
+        PessoaInfo info = mock(PessoaInfo.class);
+        when(info.getPeso()).thenReturn(32.3);
+        when(info.getAltura()).thenReturn(1.0);
+        when(info.getSexo()).thenReturn("feminino");
+
+        String resultado = this.pessoa.calcularIMC(info);
+        assertEquals("Obesa", resultado);
     }
 }

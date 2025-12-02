@@ -1,6 +1,6 @@
 package com.lucaslima.imc;
 
-public class Pessoa {
+public class Pessoa implements PessoaInfo {
 
     private double peso;
     private double altura;
@@ -15,55 +15,32 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public String calcularIMC()
-    {
-        double imc;
+    public String calcularIMC(PessoaInfo info) {
+        double imc = info.getPeso() / (info.getAltura() * info.getAltura());
         String classificacaoImc;
 
-        imc = this.getPeso() / (this.getAltura() * this.getAltura());
-
-        if(this.getSexo().equalsIgnoreCase("feminino"))
-        {
-            if(imc < 19.1)
-            {
+        if (info.getSexo().equalsIgnoreCase("feminino")) {
+            if (imc < 19.1) {
                 classificacaoImc = "Abaixo do peso";
-            }
-            else if(imc < 25.8)
-            {
+            } else if (imc < 25.8) {
                 classificacaoImc = "No peso normal";
-            }
-            else if(imc < 27.3)
-            {
+            } else if (imc < 27.3) {
                 classificacaoImc = "Marginalmente acima do peso";
-            }
-            else if(imc < 32.3)
-            {
+            } else if (imc < 32.3) {
                 classificacaoImc = "Acima do peso ideal";
-            }
-            else {
+            } else {
                 classificacaoImc = "Obesa";
             }
-        }
-        else
-        {
-            if(imc < 20.7)
-            {
+        } else {
+            if (imc < 20.7) {
                 classificacaoImc = "Abaixo do peso";
-            }
-            else if(imc < 26.4)
-            {
+            } else if (imc < 26.4) {
                 classificacaoImc = "No peso normal";
-            }
-            else if(imc < 27.8)
-            {
+            } else if (imc < 27.8) {
                 classificacaoImc = "Marginalmente acima do peso";
-            }
-            else if(imc < 31.1)
-            {
+            } else if (imc < 31.1) {
                 classificacaoImc = "Acima do peso ideal";
-            }
-            else
-            {
+            } else {
                 classificacaoImc = "Obeso";
             }
         }

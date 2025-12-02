@@ -15,7 +15,7 @@ public class ImcApplication {
         String classificacaoIMC;
 
         Pessoa p1 = new Pessoa(PESO, ALTURA, SEXO);
-        System.out.println(p1.calcularIMC());
+        System.out.println(p1.calcularIMC(p1));
 	}
 
 }
